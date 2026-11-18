@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Linq;
+using System.Threading;
 
 namespace Server
 {
@@ -23,6 +24,10 @@ namespace Server
                 // Bloccante: attende che un client si connetta
                 using (TcpClient client = listener.AcceptTcpClient())
                 {
+                    Thread thread = new Thread(DoWork);
+                    thread.Start();
+                    System.Console.WriteLine("Thread principale in esecuzione...");
+                    
                     Console.WriteLine("Client Connesso: " + client.Client.RemoteEndPoint);
 
                     using (NetworkStream stream = client.GetStream())
@@ -54,6 +59,10 @@ namespace Server
                     Console.WriteLine("Client disconnesso.");
                 }
             }
+        }
+        static void DoWork()
+        {
+            System.Console.WriteLine("Sono il thread che si occuperà di eseguire il lavoro");
         }
     }
 }
