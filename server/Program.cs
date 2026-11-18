@@ -23,7 +23,7 @@ namespace Server
                 // Bloccante: attende che un client si connetta
                 using (TcpClient client = listener.AcceptTcpClient())
                 {
-                    Console.WriteLine("Client connesso: " + client.Client.RemoteEndPoint);
+                    Console.WriteLine("Client Connesso: " + client.Client.RemoteEndPoint);
 
                     using (NetworkStream stream = client.GetStream())
                     {
